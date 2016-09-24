@@ -10,6 +10,9 @@ import java.util.function.Consumer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JSlider;
@@ -51,6 +54,10 @@ public class ColorPickerView extends JFrame implements Observer {
 	private JRadioButton blackRadioButton;
 	private JButton darkerButton;
 	private JButton brighterButton;
+	private JMenuBar menuBar;
+	private JMenu fileMenu;
+	private JMenuItem closeAppMenuItem;
+	
 
 	public ColorPickerView(ColorPickerController controller) {
 		this.controller = controller;
@@ -87,6 +94,9 @@ public class ColorPickerView extends JFrame implements Observer {
 		blackRadioButton = new JRadioButton("black");
 		brighterButton = new JButton("Brighter");
 		darkerButton = new JButton("Darker");
+		menuBar = new JMenuBar();
+		fileMenu = new JMenu("File");
+		closeAppMenuItem = new JMenuItem("Close");
 	}
 
 	private JSlider initializeSlider() {
@@ -116,6 +126,8 @@ public class ColorPickerView extends JFrame implements Observer {
 
 		brighterButton.addActionListener(e -> controller.brightenColor());
 		darkerButton.addActionListener(e -> controller.darkenColor());
+		
+		closeAppMenuItem.addActionListener(e -> controller.closeApp());
 	}
 
 	private void addRadioButtonListener(JRadioButton radioButton, Color color) {
@@ -215,6 +227,10 @@ public class ColorPickerView extends JFrame implements Observer {
 		
 		constraints.gridy += 2;
 		add(darkerButton, constraints);
+		
+		fileMenu.add(closeAppMenuItem);
+		menuBar.add(fileMenu);
+		setJMenuBar(menuBar);
 	}
 
 	private void layoutTextField(JTextField textField, GridBagConstraints constraints) {

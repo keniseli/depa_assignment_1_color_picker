@@ -59,4 +59,8 @@ public class ColorPickerController {
 		return currentColor;
 	}
 
+	public void closeApp() {
+		System.exit(0);
+		}
+
 }
